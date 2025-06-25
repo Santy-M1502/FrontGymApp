@@ -9,7 +9,7 @@
 <body>
 
   <header>
-    <img src="logo.png" alt="logoPagina" class="logo">
+    <a href="#home"><img src="logo.png" alt="logoPagina" class="logo"></a>
     <nav>
       <a href="#planes">Planes</a>
       <a href="#galeria">Ejercicios</a>
@@ -17,16 +17,20 @@
     </nav>
   </header>
 
-  <section class="welcome" id="home">
-    <h2>¡Bienvenido a FuerzaMax!</h2>
-    <div class="welcome-buttons">
-      <button class="button-plans">Ver Planes</button>
-      <button class="button-exercises">Ver Ejercicios</button>
+  <section class="welcome reveal" id="home">
+    <video autoplay muted loop class="bg-video">
+      <source src="gymVideo.mp4" type="video/mp4">
+    </video>
+    <div class="contenido">
+      <h2>¡Bienvenido a FuerzaMax!</h2>
+      <div class="welcome-buttons">
+        <button class="button-plans">Ver Planes</button>
+        <button class="button-exercises">Ver Ejercicios</button>
+      </div>
     </div>
-    <img src="https://www.2playbook.com/uploads/s1/39/92/82/lifter-crew-valencia-8_14_744x403.jpeg" alt="Imagen bienvenida">
   </section>
 
-  <section class="planes" id="planes">
+  <section class="planes reveal" id="planes">
     <div class="animatedBorder">
       <div class="plan plan-week">
         <h3>Plan Semanal</h3>
@@ -65,7 +69,7 @@
     </div>
   </section>
 
-  <section class="galeria" id="galeria">
+  <section class="galeria reveal" id="galeria">
     <div class="legDesc desc" hidden>
       Fortalecé tus bases con rutinas intensas que activan cuádriceps, femorales y glúteos. Desde sentadillas profundas hasta prensa y desplantes, vas a sentir cómo cada paso se vuelve más firme y explosivo.
     </div>
@@ -102,9 +106,8 @@
     </div>
   </section>
 
-  <section class="contacto" id="contacto">
+  <section class="contacto reveal" id="contacto">
     <h2>Contacto</h2>
-    <img src="/gym.png" alt="Imagen de contacto">
     <div class="contacto-formas">
       <div class="animatedBorder">
         <div class="forma">

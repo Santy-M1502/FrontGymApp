@@ -5,7 +5,7 @@ if (!(screen.width >= 375 && screen.width <= 768)) {
     images.forEach((image) => {
         image.addEventListener('mouseover', () => {
             descs.forEach((desc) => {
-                desc.style.display = 'none'; // Hide all descriptions initially
+                desc.style.display = 'none';
             });
             const imageAlt = image.getAttribute('alt');
             console.log("Mouseover on image with alt:", imageAlt);
@@ -23,3 +23,13 @@ if (!(screen.width >= 375 && screen.width <= 768)) {
             }
             });
     })};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+});
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));

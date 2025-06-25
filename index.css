@@ -49,6 +49,13 @@ nav a {
 .welcome {
     text-align: center;
     padding: 5rem 1rem;
+    position: relative;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
 .welcome h2 {
@@ -82,9 +89,17 @@ nav a {
 
 .welcome img {
     margin-top: 2rem;
-    max-width: 100%;
+    max-width: 50%;
     height: auto;
     border-radius: 10px;
+}
+
+.bg-video {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.15;
+  z-index: -1;
 }
 
 .animatedBorder{
@@ -244,6 +259,17 @@ footer {
     padding: 1rem;
     background-color: var(--primary);
     color: #000;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 #planes {
