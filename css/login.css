@@ -50,6 +50,104 @@ nav a {
     border-radius: 10px;
 }
 
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.formulario{
+    background-color: #2c2c2c;
+    color: var(--text-light);
+    border: 1px solid var(--text-light);
+    padding: 2em;
+    animation: aparicion 1.5s ease forwards;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(216, 162, 94, 0.2);
+    margin-top: 2em;
+}
+
+.options{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+    gap: 1em;
+}
+
+.options a{
+    text-decoration: none;
+    color: var(--text-light);
+}
+
+.option{
+    padding: 0.5em 1em;
+    border-radius: 6px;
+    border: 1px solid var(--text-light);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.option:hover {
+  transform: scale(1.05);
+  background-color: var(--secondary);
+  color: #000;
+}
+
+.select{
+    transform: scale(1.2);
+    background-color: var(--primary);
+}
+
+.inputs-inputs{
+    display: flex;
+    flex-direction: column;
+}
+
+.inputs-inputs input{
+    background-color: #1e1e1e;
+    border: 1px solid #555;
+    padding: 0.5em;
+    margin-top: 0.2em;
+    margin-bottom: 1em;
+    border-radius: 6px;
+    color: var(--text-light);
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inputs-inputs input:focus{
+    outline: none;
+    border: 1px solid var(--secondary);
+    box-shadow: 0 0 10px var(--secondary);
+}
+
+.inputs-box{
+    display: flex;
+}
+
+.button-login {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border: none;
+  padding: 0.7em 1.5em;
+  border-radius: 10px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+.button-login:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--secondary);
+}
+
+.button-box{
+    display: flex;
+    flex-direction: column;
+    align-self: end;
+    margin-left: 5em;
+}
+
 footer {
     text-align: center;
     padding: 1rem;
@@ -88,14 +186,13 @@ nav a:hover{
     }
 }
 
-@keyframes borderColor {
-    0% {
-    background-position: 0% 50%;
+@keyframes aparicion {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
-  50% {
-    background-position: 150% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
