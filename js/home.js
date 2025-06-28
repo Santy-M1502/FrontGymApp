@@ -19,6 +19,7 @@ function agregarLineasAnimadas(idSeccion, cantidad = 10) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+  verificarDias();
   agregarLineasAnimadas('start', 15);
 });
 
@@ -61,3 +62,27 @@ window.addEventListener('scroll', () => {
 
   ultimoScroll = scrollActual;
 });
+
+const verificarDias = () =>{
+  const start = document.getElementById('start');
+  let texto = ''
+  if(true){
+    texto = `
+    <div class="start-container">
+        <h2>Te quedan</h2>
+        <h3><strong>20</strong> dias</h3>
+        <p>antes de que termine tu plan</p>
+    </div>
+    `
+  }
+  else{
+      texto = `
+      <div class="start-container">
+          <h2>Tu plan ha expirado</h2>
+          <p>Renueva tu suscripción para seguir disfrutando de nuestros servicios.</p>
+          <button class="renovar-btn">Renovar planes</button>
+      </div>
+      `
+  }
+  start.innerHTML = texto;
+}
