@@ -20,6 +20,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
 }
 
 header {
@@ -32,6 +34,12 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
+    border-bottom: 1px solid var(--text-light);
+    transition: transform 0.3s ease;
+}
+
+.header-oculto{
+    transform: translateY(-100%);
 }
 
 header h1 {
@@ -40,6 +48,7 @@ header h1 {
 
 .logo{
     width: 44px;
+    display: flex;
 }
 
 nav a {
@@ -57,10 +66,179 @@ main{
     flex-direction: column;
 }
 
+section{
+    position: relative;
+}
+
+.start{
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    scroll-snap-align: start;
+}
+
+.start::after{
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5dvh;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5));
+  pointer-events: none;
+  z-index: 2;
+}
+
+.start-container{
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.start h2{
+    font-size: 5vh;
+}
+
+.start h3{
+    font-size: 12dvh;
+}
+
+.start strong{
+    color: var(--primary);
+    animation: colorLetra 2s infinite;
+}
+
+.start p{
+    font-size: 2vh;
+}
+
+.linea-fondo {
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.05);
+  animation: moverLinea 5s linear infinite;
+}
+
+.planes{
+    padding: 4rem 2rem;
+    background: linear-gradient(#BFA058, #F2F296);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-around;
+    height: 50dvh;
+}
+
+.plan{
+    background-color: var(--bg-dark);
+    border-radius: 10px;
+    padding: 1.5rem;
+    width: 24vw;
+    height: 32vh;
+}
+
+.plan h3 {
+    color: var(--secondary);
+    margin-bottom: 1rem;
+}
+
+.plan ul {
+    margin-bottom: 1rem;
+    list-style: none;
+    padding-left: 1rem;
+}
+
+.plan li::before {
+    content: "✔️ ";
+    margin-right: 0.5rem;
+}
+
+.plan button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--primary);
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+}
+
+.plan-year{
+    background-color: #A04747;
+}
+
+.button-week{
+    color: var(--primary) !important;
+    background-color: transparent !important;
+    border: 1.5px solid var(--primary) !important;
+}
+
+.galeria {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.slide.activo {
+  opacity: 1;
+  z-index: 1;
+}
+
+.slide .info {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+  padding: 20px;
+  pointer-events: none;
+}
+
+.flecha {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 2;
+  user-select: none;
+}
+
+.flecha.izquierda { left: 10px; }
+.flecha.derecha { right: 10px; }
+
+
 .contacto {
     padding: 4rem 2rem;
     text-align: center;
-    background-color: #2c2c2c;
+    background: linear-gradient(#222 10%, var(--bg-dark));
 }
 
 .contacto h2 {
@@ -90,6 +268,7 @@ main{
     border-radius: 10px;
     flex: 1 1 250px;
     text-align: center;
+    min-width: 300px;
 }
 
 .forma img {
@@ -116,6 +295,16 @@ footer {
     animation: animationLogo 2s infinite;
 }
 
+button:hover{
+    color: var(--bg-dark);
+    background-color: var(--secondary);
+}
+
+.button-exercises:hover, .button-week:hover{
+    color: var(--text-light) !important;
+    background-color: var(--primary) !important;
+}
+
 @keyframes animationLogo {
     0%{
         transform: rotate(0deg)
@@ -135,4 +324,25 @@ footer {
     100%{
         transform: rotate(360deg)
     }
+}
+
+@keyframes colorLetra {
+    0%{
+        color: var(--primary);
+    }
+    50%{
+        color: var(--secondary);
+    }
+    100%{
+        color: var(--primary);
+    }
+}
+
+@keyframes moverLinea {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(100%);
+  }
 }

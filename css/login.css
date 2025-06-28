@@ -40,6 +40,7 @@ header h1 {
 
 .logo{
     width: 44px;
+    display: flex;
 }
 
 nav a {

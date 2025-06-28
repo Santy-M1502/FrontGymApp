@@ -36,6 +36,7 @@ header h1 {
 
 .logo{
     width: 44px;
+    display: flex;
 }
 
 nav a {
@@ -242,6 +243,7 @@ nav a {
     border-radius: 10px;
     flex: 1 1 250px;
     text-align: center;
+    min-width: 300px;
 }
 
 .forma img {
@@ -307,6 +309,8 @@ button:hover{
 section img:hover{
     box-shadow: 10px 10px 10px #222;
     transform: scale(1.01);
+    filter: opacity(0.6);
+    transition: filter .3s ease-in;
 }
 
 @keyframes animationLogo {

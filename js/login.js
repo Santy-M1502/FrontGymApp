@@ -28,7 +28,23 @@ const cambiarClases = (e) =>{
             <button class="button-login">Log In</button>
         </div>
     </div>`;
+    loguear();
 }
+
+const loguear = () =>{
+    const buttonLogin = document.querySelector('.button-login');
+    buttonLogin.addEventListener('click', (e) => {
+        e.preventDefault();
+        const nombre = document.querySelector('#nombre').value;
+        const contrasena = document.querySelector('#contrasena').value;
+        if (nombre && contrasena) {
+            window.location.href = `./home.html`
+        } else {
+            alert('Por favor, completa todos los campos.');
+        }
+    });
+}
+
 
 cambiarClases();
 userButton.addEventListener('click', cambiarClases);

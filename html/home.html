@@ -8,16 +8,76 @@
 </head>
 <body>
 
-  <header>
-    <img src="/assets/logo.png" alt="logoPagina" class="logo">
-  </header>
-
-    <section>
-
+    <header>
+      <a href="#start"><img src="/assets/logo.png" alt="logoPagina" class="logo"></a>
+    </header>
+    <section class="start" id="start">
+      <div class="start-container">
+        <h2>Te quedan</h2>
+        <h3><strong>20</strong> dias</h3>
+        <p>antes de que termine tu plan</p>
+      </div>
     </section>
-    <section>
-
+    <section class="planes" id="plan">
+      <div class="animatedBorder">
+        <div class="plan plan-week">
+          <h3>Plan Semanal</h3>
+          <h2>$6500 /semana</h2>
+          <ul>
+            <li>Acceso ilimitado</li>
+            <li>Clases grupales</li>
+            <li>Rutinas personalizadas</li>
+          </ul>
+          <button class="button-week">Cambiar a este plan</button>
+        </div>
+      </div>
+      <div class="animatedBorder">
+        <div class="plan plan-month">
+          <h3>Plan Mensual</h3>
+          <h2>$25000 /mes</h2>
+          <ul>
+            <li>Todo lo del básico</li>
+            <li>Entrenador personal</li>
+            <li>Acceso a spa y a zumba</li>
+          </ul>
+          <button class="button-month">Cambiar a este plan</button>
+        </div>
+      </div>
+      <div class="animatedBorder">
+        <div class="plan plan-year">
+          <h3>Plan Anual</h3>
+          <h2>$280000 /año</h2>
+          <ul>
+            <li>Todo lo del intermedio</li>
+            <li>Nutricionista</li>
+            <li>Acceso 24/7</li>
+          </ul>
+          <button class="button-year">Cambiar a este plan</button>
+        </div>
+      </div>
     </section>
+
+    <section class="galeria">
+      <div class="slide activo" style="background-image: url('/assets/maquinas.png');">
+        <div class="info">
+          <h2>Disfruta de las mejores maquinas</h2>
+          <p>Con nuestras maquinas, gracias a su buen cuidado y ubicacion podras hacer tus ejercicios de forma limpia y comoda.</p>
+        </div>
+      </div>
+
+      <div class="slide" style="background-image: url('/assets/mancuernas.png');">
+        <div class="info">
+          <h2>Tambien tenemos una gran variedad de mancuernas y pesas</h2>
+          <p>Podras elegir el peso y forma de pesa para realizar cualquier ejercicio que quieras</p>
+        </div>
+      </div>
+
+      <!-- Más slides -->
+
+      <button class="flecha izquierda">&#10094;</button>
+      <button class="flecha derecha">&#10095;</button>
+    </section>
+
     <section class="contacto reveal" id="contacto">
         <h2>Contacto</h2>
         <div class="contacto-formas">
@@ -49,5 +109,6 @@
     © 2025 FuerzaMax. Todos los derechos reservados.
   </footer>
 
+  <script src="../js/home.js"></script>
 </body>
 </html>
