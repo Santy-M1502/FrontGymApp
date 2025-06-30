@@ -9,7 +9,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family:'Courier New', Courier, monospace;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -74,7 +74,7 @@ nav a {
 .galeria {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 80dvh;
   overflow: hidden;
   scroll-snap-align: start;
 }
@@ -89,6 +89,11 @@ nav a {
   background-position: center;
   opacity: 0;
   transition: opacity 0.8s ease;
+  min-height: calc(100vh - 140px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
 }
 
 .slide.activo {
@@ -96,24 +101,53 @@ nav a {
   z-index: 1;
 }
 
-.slide .info {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  right: 20px;
-  bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  color: #fff;
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
-  padding: 20px;
-  pointer-events: none;
+.plan-container {
+    min-height: calc(100vh - 140px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
 }
 
-.info h2{
-    font-size: 2em;
+.plan-card {
+    background-color: var(--text-light);
+    max-width: 600px;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    text-align: center;
+}
+
+.plan-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--bg-dark);
+}
+
+.plan-benefits {
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.plan-benefits li {
+    margin: 0.5rem 0;
+    color: var(--bg-dark);
+}
+
+.plan-button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.plan-button:hover {
+    background-color: var(--bg-dark);
 }
 
 .flecha {
@@ -142,57 +176,24 @@ nav a {
  text-align: center;
 }
 
-.slide .info h2 {
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-    font-family: 'Courier New', monospace;
-    color: #ffef9f;
+.slide .semanal {
+    background-color: var(--bg-dark);
 }
 
-.slide .main h3 {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    font-weight: 500;
+.slide .mensual {
+    background-color: var(--secondary);
 }
 
-.slide ul {
-    list-style: none;
-    padding-left: 0;
-    line-height: 1.8;
+.slide .anual {
+    background-color: var(--primary);
 }
 
-.slide ul li {
-    font-size: 0.95rem;
-    color: #e0dede;
-}
-
-.slide button {
-    margin-top: 1.5rem;
-    padding: 0.7rem 1.5rem;
-    font-weight: bold;
-    background-color: #d8a25e;
-    border: none;
-    border-radius: 8px;
-    color: #222;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.slide button:hover {
-    background-color: #b97e35;
-    color: #fff;
-}
-
-.slide.semanal {
-    background-color: #2f2f2f;
-}
-
-.slide.mensual {
-    background-color: #1e1e1e;
-}
-
-.slide.anual {
-    background-color: #7b3f3f;
+.main{
+    background-color: var(--text-light);
+    color: var(--bg-dark);
+    border-radius: 15px;
+    padding: 1em 0;
+    border: 3px solid #000;
 }
 
 footer {
@@ -200,6 +201,7 @@ footer {
     padding: 1rem;
     background-color: var(--primary);
     color: #000;
+    border-top: 2px solid var(--text-light);
 }
 
 @keyframes animationLogo {
@@ -222,3 +224,13 @@ footer {
         transform: rotate(360deg)
     }
 }
+
+@media (max-width: 600px) {
+      .plan-card {
+        padding: 1.5rem;
+      }
+
+      .plan-title {
+        font-size: 1.6rem;
+      }
+    }

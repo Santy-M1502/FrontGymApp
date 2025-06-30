@@ -178,6 +178,12 @@ section{
     border: 1.5px solid var(--primary) !important;
 }
 
+.btn-plan a{
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+}
+
 .galeria {
   position: relative;
   width: 100%;
@@ -306,6 +312,35 @@ button:hover{
     background-color: var(--primary) !important;
 }
 
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: #25D366;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      text-decoration: none;
+      z-index: 9999;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .whatsapp-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .whatsapp-btn img {
+      border-radius: 100%;
+      width: 80%;
+      object-fit: cover;
+      animation: moverLogo 2s infinite;
+    }
+
 @keyframes animationLogo {
     0%{
         transform: rotate(0deg)
@@ -324,6 +359,27 @@ button:hover{
     }
     100%{
         transform: rotate(360deg)
+    }
+}
+
+@keyframes moverLogo{
+    0%{
+        transform:translateY(-30px);
+    }
+    20%{
+        transform: translateY(0px);
+    }
+    40%{
+        transform: translateX(5px);
+    }
+    60%{
+        transform: translateX(-5px);
+    }
+    80%{
+        transform: translateX(0px);
+    }
+    100%{
+        transform: translateY(-30px);
     }
 }
 
