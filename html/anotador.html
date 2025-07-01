@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FuerzaMax</title>
+  <link rel="stylesheet" href="/css/anotador.css">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="/css/general.css">
+</head>
+<body>
+
+    <header>
+      <a href="http://localhost:5501/html/home.html"><img src="/assets/logo.png" alt="logoPagina" class="logo"></a>
+      <div class="links-header">
+        <a href="http://localhost:5501/html/home.html">Inicio</a>
+        <a href="http://localhost:5501/html/plan.html">Planes</a>
+        <a href="">Anotador</a>
+      </div>
+    </header>
+
+    <main style="background-color: var(--bg-dark); color: var(--text-light); min-height: 100vh; padding: 2rem;">
+        <h1 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">Anotador</h1>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <button class="agregar-btn" style="background-color: var(--primary); color: var(--bg-dark); border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">
+            Agregar
+            </button>
+            <p style="color: var(--secondary); margin: 0;">* Haz clic en editar para modificar una entrada</p>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+            <tr style="background-color: var(--secondary); color: var(--bg-dark);">
+                <th style="padding: 0.75rem; text-align: left;">Nombre</th>
+                <th style="padding: 0.75rem; text-align: left;">Texto</th>
+                <th style="padding: 0.75rem; text-align: left;">Número</th>
+                <th style="padding: 0.75rem;"></th>
+            </tr>
+            </thead>
+            <tbody id="tabla-anotaciones">
+            <tr style="border-bottom: 1px solid var(--primary);">
+                <td style="padding: 0.75rem;">Juan Pérez</td>
+                <td style="padding: 0.75rem;">Nota importante</td>
+                <td style="padding: 0.75rem;">42</td>
+                <td style="padding: 0.75rem;">
+                <button style="margin-right: 0.5rem; background-color: var(--secondary); border: none; padding: 0.3rem 0.6rem; border-radius: 4px; cursor: pointer;">Editar</button>
+                <button style="background-color: crimson; color: white; border: none; padding: 0.3rem 0.6rem; border-radius: 4px; cursor: pointer;">Eliminar</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+
+
+    <footer>
+        © 2025 FuerzaMax. Todos los derechos reservados.
+    </footer>
+
+  <script src="../js/anotador.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+.agregar-btn:hover{
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+}
