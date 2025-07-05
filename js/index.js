@@ -1,7 +1,8 @@
 const images = document.querySelectorAll('.imagen-img');
 const descs = document.querySelectorAll('.desc');
 
-if (!(screen.width >= 375 && screen.width <= 768)) {
+if ((screen.width > 768)) {
+    console.log('hola')
     images.forEach((image) => {
         image.addEventListener('mouseover', () => {
             descs.forEach((desc) => {

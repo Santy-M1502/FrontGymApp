@@ -1,0 +1,78 @@
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 1rem;
+  padding: 10rem 2rem;
+  max-width: 800px;
+  margin: auto;
+}
+
+.titulo {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  align-self: start;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.plan-info {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  background-color: var(--text-light);
+  padding: 1rem;
+  border-radius: 8px;
+  color: var(--bg-dark);
+}
+
+.plan-info h2 {
+  margin-bottom: 0.5rem;
+}
+
+.plan-info ul {
+  margin-left: 1.2rem;
+  list-style-type: disc;
+}
+
+.precio {
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
+  font-size: 1.5rem;
+  font-weight: bold;
+  align-self: center;
+}
+
+.boton {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+  justify-self: end;
+  align-self: center;
+}
+
+.boton button {
+  background-color: #2ecc71;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.boton button:hover {
+  background-color: #27ae60;
+}
+
+@media (max-width: 768px) {
+  main {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+  }
+
+  .boton {
+    grid-column: 1 / 2;
+    grid-row: 4 / 5;
+    justify-self: start;
+  }
+}
