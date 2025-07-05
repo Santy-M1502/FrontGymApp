@@ -6,6 +6,8 @@ main {
   padding: 2rem;
   max-width: 800px;
   margin: auto;
+  border-radius: 20px;
+  min-height: 80dvh;
 }
 
 .planPages {
@@ -14,6 +16,7 @@ main {
   display: flex;
   justify-content: center;
   gap: 1rem;
+  border-radius: 20px;
 }
 
 .planPages input[type="radio"] {
@@ -67,19 +70,25 @@ main {
 }
 
 .boton button {
-  background-color: var(--primary);
+  background-color: #2c2c2c;
   color: white;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
-  border: none;
+  border: 1px solid var(--text-light);
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .boton button:hover {
-  background-color: var(--secondary);
+  background-color: var(--text-light);
+  color: var(--bg-dark);
 }
+
+.titulo, .plan-info , .precio{
+  text-shadow: 0px 0px 10px #000;
+}
+
 
 @media (max-width: 768px) {
   main {
@@ -94,5 +103,8 @@ main {
 
   .boton button {
     width: 100%;
+  }
+  .plan-info {
+    grid-column: 1 / 3;
   }
 }

@@ -7,15 +7,20 @@ const planSemanal = document.querySelector('.semanal')
 const planMensual = document.querySelector('.mensual')
 const planAnual = document.querySelector('.anual')
 
+const main = document.querySelector('.main')
+
 const elejirPlan = (tipo) =>{
     if(tipo == 'semanal'){
         planSemanal.checked = true
+        main.style.backgroundColor = 'var(--bg-dark)'
     }
     else if(tipo == 'mensual'){
         planMensual.checked = true
+        main.style.backgroundColor = 'var(--secondary)'
     }
     else{
         planAnual.checked = true
+        main.style.backgroundColor = 'var(--primary)'
     }
 }
 
@@ -59,15 +64,18 @@ const mostrarPlan = (tipo) => {
 
 
 document.querySelectorAll('.plan').forEach(e => {
-    e.addEventListener('click', () =>{
+    e.addEventListener('input', () =>{
         if(e.classList.contains('semanal')){
             mostrarPlan('semanal')
+            main.style.backgroundColor = 'var(--bg-dark)'
         }
         else if(e.classList.contains('mensual')){
             mostrarPlan('mensual')
+            main.style.backgroundColor = 'var(--secondary)'
         }
         else if(e.classList.contains('anual')){
             mostrarPlan('anual')
+            main.style.backgroundColor = 'var(--primary)'
         }
     })
 });

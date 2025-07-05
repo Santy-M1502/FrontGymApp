@@ -328,3 +328,24 @@ button:hover{
     transform: translateY(100%);
   }
 }
+
+@media (max-width: 768px) {
+  .planes {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 2rem 1rem;
+  }
+
+  .plan {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
+
+  .animatedBorder {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
