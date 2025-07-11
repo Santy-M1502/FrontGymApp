@@ -1,6 +1,6 @@
 main {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.6fr 0.4fr;
   grid-template-rows: auto auto auto auto;
   gap: 1rem;
   padding: 2rem;
@@ -50,16 +50,13 @@ main {
   list-style-type: disc;
 }
 
-.planPages{
-  margin-bottom: 10%;
-}
-
 .precio {
   grid-column: 1 / 2;
   grid-row: 4 / 5;
   font-size: 1.5rem;
   font-weight: bold;
   align-self: center;
+  text-decoration: underline;
 }
 
 .boton {
@@ -85,7 +82,7 @@ main {
   color: var(--bg-dark);
 }
 
-.titulo, .plan-info , .precio{
+.titulo , .precio{
   text-shadow: 0px 0px 10px #000;
 }
 

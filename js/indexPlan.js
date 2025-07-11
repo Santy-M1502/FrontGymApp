@@ -13,14 +13,17 @@ const elejirPlan = (tipo) =>{
     if(tipo == 'semanal'){
         planSemanal.checked = true
         main.style.backgroundColor = 'var(--bg-dark)'
+        main.style.backgroundImage = "url('/assets/low-contrast-linen.png')";
     }
     else if(tipo == 'mensual'){
         planMensual.checked = true
         main.style.backgroundColor = 'var(--secondary)'
+        main.style.backgroundImage = "url('/assets/low-contrast-linen.png')";
     }
     else{
         planAnual.checked = true
         main.style.backgroundColor = 'var(--primary)'
+        main.style.backgroundImage = "url('/assets/low-contrast-linen.png')";
     }
 }
 
@@ -37,7 +40,7 @@ const mostrarPlan = (tipo) => {
         <li>Rutinas personalizadas cada semana</li>
         <li>Acceso a clases grupales</li>
     `;
-    document.querySelector('.precio').innerHTML = '$7500'
+    document.querySelector('.precio').innerHTML = '$7500 /semana'
 
   if (tipo === 'mensual') {
     listaBeneficios.innerHTML += `
@@ -68,14 +71,17 @@ document.querySelectorAll('.plan').forEach(e => {
         if(e.classList.contains('semanal')){
             mostrarPlan('semanal')
             main.style.backgroundColor = 'var(--bg-dark)'
+            main.style.backgroundImage = "url('/assets/low-contrast-linen.png')";
         }
         else if(e.classList.contains('mensual')){
             mostrarPlan('mensual')
             main.style.backgroundColor = 'var(--secondary)'
+            main.style.backgroundImage = "url('/assets/low-contrast-linen.png')";
         }
         else if(e.classList.contains('anual')){
             mostrarPlan('anual')
             main.style.backgroundColor = 'var(--primary)'
+            main.style.backgroundImage = "url('/assets/low-contrast-linen.png')";
         }
     })
 });

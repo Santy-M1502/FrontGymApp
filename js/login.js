@@ -1,3 +1,5 @@
+import { URL_BASE } from "./constantes.js";
+
 const userButton = document.querySelector('.user');
 const userAdmin = document.querySelector('.admin');
 const formulario = document.querySelector('.formulario');
@@ -14,13 +16,13 @@ const cambiarClases = (e) =>{
     }else if(userAdmin.classList.contains('select')) {
         userButton.classList.add('select');
         userAdmin.classList.remove('select');
-        who = 'Nombre de Usuario';
+        who = 'Email de Usuario';
     }
     formulario.innerHTML = `
     <div class="inputs-box">
         <div class="inputs-inputs">
-            <label for="nombre">${who}</label>
-            <input type="text" id="nombre">
+            <label for="email">${who}</label>
+            <input type="text" id="email">
             <label for="contrasena">Contrasena</label>
             <input type="password" id="contrasena">
         </div>
@@ -33,15 +35,31 @@ const cambiarClases = (e) =>{
 
 const loguear = () =>{
     const buttonLogin = document.querySelector('.button-login');
-    buttonLogin.addEventListener('click', (e) => {
+    buttonLogin.addEventListener('click', async (e) => {
         e.preventDefault();
-        const nombre = document.querySelector('#nombre').value;
+        const email = document.querySelector('#email').value;
         const contrasena = document.querySelector('#contrasena').value;
-        if (nombre && contrasena) {
-            window.location.href = `./home.html`
-        } else {
-            alert('Por favor, completa todos los campos.');
-        }
+        const rol = userButton.classList.contains('select')? 'user' : 'admin'
+        if(!email || !contrasena){
+            alert("Por favor, complete todos los campos")
+        }else{
+            try {
+                const response = await fetch(`${URL_BASE}/login`,{
+                    method: 'POST',
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body: JSON.stringify({email, contrasena, rol})
+                })
+                if (!response.ok){
+                    alert("Email o Contrasena incorrecta")
+                    throw new Error("Error en el inicio de sesion");
+                }
+                alert('Bienvenido')
+                window.location.href = '/html/home.html'
+            } catch (error) {
+                console.error('Credenciales incorrectas', error)
+            }}
     });
 }
 
