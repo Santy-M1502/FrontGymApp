@@ -12,7 +12,7 @@ const cambiarClases = (e) =>{
     if(userButton.classList.contains('select')) {
         userAdmin.classList.add('select');
         userButton.classList.remove('select');
-        who = 'Numero de Administrador';
+        who = 'Email de Administrador';
     }else if(userAdmin.classList.contains('select')) {
         userButton.classList.add('select');
         userAdmin.classList.remove('select');
@@ -55,8 +55,12 @@ const loguear = () =>{
                     alert("Email o Contrasena incorrecta")
                     throw new Error("Error en el inicio de sesion");
                 }
+                const data = await response.json();
+                localStorage.setItem('token', data.token);
                 alert('Bienvenido')
-                window.location.href = '/html/home.html'
+                rol === 'admin' 
+                ? window.location.href = '/html/adminHome.html' 
+                : window.location.href = '/html/home.html';
             } catch (error) {
                 console.error('Credenciales incorrectas', error)
             }}

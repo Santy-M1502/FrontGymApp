@@ -1,0 +1,29 @@
+main{
+    display: flex;
+    justify-content: center;
+}
+
+.formBox{
+    min-width: 30dvw;
+    max-width: 60dvw;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 3em;
+    border-radius: 15px;
+    background: linear-gradient(var(--primary), var(--text-light));
+    color: var(--bg-dark);
+}
+
+.formBox label{
+    font-size: 1.5em;
+}
+
+.formBox input{
+    padding: .2em;
+    min-width: 50%;
+}
+
+.formBox select{
+    padding: .3em 0;
+}
