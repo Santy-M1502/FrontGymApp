@@ -20,12 +20,77 @@
         <a href="/html/index.html">LogOut</a>
       </nav>
     </header>
-    
+
+      <section class="filters">
+        <button class="btn primary">Agregar</button>
+        <input type="text" placeholder="Buscar..." class="input" />
+        <select class="input">
+          <option value="">Todos</option>
+          <option value="espalda">Espalda</option>
+          <option value="pecho">Pecho</option>
+          <option value="piernas">Piernas</option>
+          <option value="brazos">Brazos</option>
+        </select>
+        <button class="btn secondary">Filtrar</button>
+      </section>
+
+      <section class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+          </tbody>
+        </table>
+      </section>
+      
+      <div id="modalAgregar" class="modal hidden">
+        <div class="modal-content">
+          <h2>Agregar Ejercicio</h2>
+          <input type="text" placeholder="Nombre" id="nuevoNombre">
+          <select id="nuevoMusculo">
+            <option value="Espalda">Espalda</option>
+            <option value="Pecho">Pecho</option>
+            <option value="Piernas">Piernas</option>
+            <option value="Brazos">Brazos</option>
+          </select>
+          <input type="number" placeholder="Cantidad" id="nuevaCantidad" min="0">
+          <div class="modal-buttons">
+            <button id="confirmarAgregar" class="btn primary">Guardar</button>
+            <button class="btn secondary cerrar">Cancelar</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="modalEditar" class="modal hidden">
+        <div class="modal-content">
+          <h2>Editar Ejercicio</h2>
+          <input type="text" id="editarNombre">
+          <select id="editarMusculo">
+            <option value="Espalda">Espalda</option>
+            <option value="Pecho">Pecho</option>
+            <option value="Piernas">Piernas</option>
+            <option value="Brazos">Brazos</option>
+          </select>
+          <input type="number" id="editarCantidad" min="0">
+          <div class="modal-buttons">
+            <button id="confirmarEditar" class="btn primary">Guardar Cambios</button>
+            <button class="btn secondary cerrar">Cancelar</button>
+          </div>
+        </div>
+      </div>
+
+
   <footer>
     © 2025 FuerzaMax. Todos los derechos reservados.
   </footer>
 
-  <script type="module" src="/js/admin.js"></script>
+  <script type="module" src="/js/adminEditar.js"></script>
   <script src="/js/navbarScroll.js"></script>
 </body>
 </html>
