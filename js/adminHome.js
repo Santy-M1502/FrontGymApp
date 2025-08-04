@@ -1,9 +1,6 @@
-import { USER_ROUTE, EXERCISE_ROUTE, PLAN_ROUTE } from './constantes.js';
+import { USER_ROUTE, EXERCISE_ROUTE } from './constantes.js';
 
 const token = localStorage.getItem('token');
-
-const userSection = document.getElementById('usuarios');
-const ejercicioSection = document.getElementById('ejercicios');
 
 let todosLosUsuarios = [];
 let todosLosEjercicios = [];
@@ -24,15 +21,15 @@ function renderUsuarios() {
         <p><strong>${user.nombre} ${user.apellido}</strong></p>
         <p>Rol: ${user.rol}</p>
       </div>
-      <div>
-        <button class="btn small delete" data-id="${user.id}">Eliminar</button>
+      <div class="card-buttons">
+        <button class="btn small edit-user" data-id="${user.id}">Editar</button>
+        <button class="btn small delete-user" data-id="${user.id}">Eliminar</button>
       </div>
     `;
     container.appendChild(div);
   });
 
-  // Eliminar botones previos
-  document.querySelectorAll('.delete').forEach(btn => {
+  document.querySelectorAll('.delete-user').forEach(btn => {
     btn.onclick = async () => {
       const id = btn.dataset.id;
       const res = await fetch(`${USER_ROUTE}/${id}`, {
@@ -45,18 +42,26 @@ function renderUsuarios() {
       }
     };
   });
+
+  document.querySelectorAll('.edit-user').forEach(btn => {
+    btn.onclick = () => {
+      const id = btn.dataset.id;
+      window.location.href = `/html/adminEditar.html?userId=${id}`;
+    };
+  });
 }
 
 document.getElementById('btn-usuarios-mas').onclick = () => {
   mostrarUsuarios += 5;
   renderUsuarios();
 };
+
 document.getElementById('btn-usuarios-todos').onclick = () => {
   mostrarUsuarios = todosLosUsuarios.length;
   renderUsuarios();
 };
 
-fetch(`${USER_ROUTE}`, {
+fetch(USER_ROUTE, {
   headers: { 'Authorization': `Bearer ${token}` }
 })
   .then(res => res.json())
@@ -79,9 +84,26 @@ function renderEjercicios() {
         <p><strong>${ej.nombre}</strong></p>
         <p>Músculo: ${ej.musculo}</p>
       </div>
-      <a href="/html/adminEditar.html" class="btn small">Editar</a>
+      <div class="card-buttons">
+        <a href="/html/adminEditar.html?ejercicioId=${ej.id}" class="btn small">Editar</a>
+        <button class="btn small delete-ejercicio" data-id="${ej.id}">Eliminar</button>
+      </div>
     `;
     container.appendChild(div);
+  });
+
+  document.querySelectorAll('.delete-ejercicio').forEach(btn => {
+    btn.onclick = async () => {
+      const id = btn.dataset.id;
+      const res = await fetch(`${EXERCISE_ROUTE}/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        todosLosEjercicios = todosLosEjercicios.filter(e => e.id !== Number(id));
+        renderEjercicios();
+      }
+    };
   });
 }
 
@@ -89,12 +111,13 @@ document.getElementById('btn-ejercicios-mas').onclick = () => {
   mostrarEjercicios += 5;
   renderEjercicios();
 };
+
 document.getElementById('btn-ejercicios-todos').onclick = () => {
   mostrarEjercicios = todosLosEjercicios.length;
   renderEjercicios();
 };
 
-fetch(`${EXERCISE_ROUTE}`, {
+fetch(EXERCISE_ROUTE, {
   headers: { 'Authorization': `Bearer ${token}` }
 })
   .then(res => res.json())

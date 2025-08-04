@@ -15,8 +15,8 @@
     <a href="/html/adminHome.html"><img src="/assets/logo.png" alt="logoPagina" class="logo"></a>
     <nav>
       <a href="/html/adminHome.html">Inicio</a>
-      <a href="/html/adminRegistrar.html">Registrar</a>
-      <a href="/html/adminEditar.html">Editar</a>
+      <a href="/html/adminRegistrar.html">Usuarios</a>
+      <a href="/html/adminEditar.html">Ejercicios</a>
       <a href="/html/index.html">LogOut</a>
     </nav>
   </header>
@@ -41,26 +41,12 @@
     </section>
   </main>
 
-    
   <footer>
     © 2025 FuerzaMax. Todos los derechos reservados.
   </footer>
 
   <script type="module" src="/js/adminHome.js"></script>
   <script src="/js/navbarScroll.js"></script>
-
-  <div id="modalEditarPlan" class="modal hidden">
-    <div class="modal-content">
-      <h2>Editar Plan</h2>
-      <input type="text" id="planTipo" placeholder="Tipo (ej: Mensual)">
-      <input type="number" id="planDias" placeholder="Días de duración">
-      <input type="number" id="planPrecio" placeholder="Precio" step="0.01">
-      <div class="modal-buttons">
-        <button id="guardarCambiosPlan" class="btn primary">Guardar</button>
-        <button class="btn secondary cerrar">Cancelar</button>
-      </div>
-    </div>
-  </div>
 
 </body>
 </html>
