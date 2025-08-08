@@ -46,7 +46,7 @@ function renderUsuarios() {
   document.querySelectorAll('.edit-user').forEach(btn => {
     btn.onclick = () => {
       const id = btn.dataset.id;
-      window.location.href = `/html/adminEditar.html?userId=${id}`;
+      window.location.href = `/html/adminRegistrar.html?userId=${id}`;
     };
   });
 }

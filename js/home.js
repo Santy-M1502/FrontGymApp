@@ -1,4 +1,4 @@
-// Animación de líneas en el fondo
+import { USER_ROUTE } from './constantes.js';
 
 function agregarLineasAnimadas(idSeccion, cantidad = 10) {
   const seccion = document.getElementById(idSeccion);
@@ -44,31 +44,46 @@ document.querySelector('.flecha.derecha').addEventListener('click', () => {
   mostrarSlide(indiceActual);
 });
 
-const verificarDias = () =>{
+async function verificarDias() {
+  const token = localStorage.getItem('token');
   const start = document.getElementById('start');
-  let texto = ''
-  if(true){
-    texto = `
-    <div class="start-container">
-        <h2>Te quedan</h2>
-        <h3><strong>20</strong> dias</h3>
-        <p>antes de que termine tu plan</p>
-    </div>
-    `
-  }
-  else{
-      texto = `
-      <div class="start-container">
+
+  try {
+    const res = await fetch(`${USER_ROUTE}/dias-restantes`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+
+    if (!res.ok) {
+      const text = await res.text();  // para ver qué devuelve el servidor realmente
+      console.error('Error en la respuesta:', text);
+      start.innerHTML = '<p>Error al obtener días restantes.</p>';
+      return;
+    }
+
+    const data = await res.json();
+
+    if (!data.expirado) {
+      start.innerHTML = `
+        <div class="start-container">
+          <h2>Te quedan</h2>
+          <h3><strong>${data.diasRestantes}</strong> días</h3>
+          <p>antes de que termine tu plan</p>
+        </div>
+      `;
+    } else {
+      start.innerHTML = `
+        <div class="start-container">
           <h2>Tu plan ha expirado</h2>
           <p>Renueva tu suscripción para seguir disfrutando de nuestros servicios.</p>
           <button class="renovar-btn">Renovar planes</button>
-      </div>
-      `
+        </div>
+      `;
+    }
+  } catch (error) {
+    console.error('Error en verificarDias:', error);
+    start.innerHTML = '<p>Error al cargar los días restantes.</p>';
   }
-  start.innerHTML = texto;
 }
-
-// Evento para el botón de renovar planes
 
 document.addEventListener('click', (event) => {
   if (event.target.classList.contains('button-week')) {
@@ -81,3 +96,5 @@ document.addEventListener('click', (event) => {
     window.location.href = 'http://localhost:5501/html/plan.html?plan=year';
   }
 });
+
+document.addEventListener('DOMContentLoaded', verificarDias);

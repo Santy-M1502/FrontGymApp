@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const telefono = e.target[3].value;
             const email = e.target[4].value;
             const contrasena = e.target[5].value;
-            const plan = e.target[6].value;
+            const idPlan = e.target[6].value;
             const rol = e.target[7].value;
 
             const response = await fetch(`${USER_ROUTE}/`, {
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ contrasena, nombre, apellido, dni, telefono, email, plan, rol })
+                body: JSON.stringify({ contrasena, nombre, apellido, dni, telefono, email, idPlan, rol })
             });
 
             if (!response.ok) {
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             div.classList.add('user-card');
             div.innerHTML = `
                 <div>
-                    <p><strong>${user.nombre} ${user.apellido}</strong></p>
+                    <p><strong>${user.email}</strong></p>
                     <p>Rol: ${user.rol}</p>
                 </div>
                 <div>
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 formEditar['edit-dni'].value = user.dni || '';
                 formEditar['edit-telefono'].value = user.telefono || '';
                 formEditar['edit-email'].value = user.email || '';
-                formEditar['edit-plan'].value = user.plan || '';
+                formEditar['edit-plan'].value = user.idPlan || '';
                 formEditar['edit-rol'].value = user.rol || 'user';
 
                 modal.classList.remove('hidden');
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 dni: formEditar['edit-dni'].value,
                 telefono: formEditar['edit-telefono'].value,
                 email: formEditar['edit-email'].value,
-                plan: formEditar['edit-plan'].value,
+                idPlan: formEditar['edit-plan'].value,
                 rol: formEditar['edit-rol'].value
             };
 
