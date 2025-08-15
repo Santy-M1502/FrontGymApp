@@ -2,3 +2,198 @@
     background-color: var(--bg-dark);
     color: var(--text-light);
 }
+
+/* modal.css */
+
+/* Fondo del modal (oscurece la pantalla) */
+.modal {
+  display: none; /* oculto por defecto */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6); /* semitransparente */
+  z-index: 1000;
+  overflow: auto;
+}
+
+/* Contenido del modal */
+.modal-content {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  padding: 2rem;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+  margin: 5% auto;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: translateY(-50px);
+  opacity: 0;
+}
+
+/* Mostrar modal */
+.modal.show .modal-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Título del modal */
+#modal-title {
+  text-align: center;
+  font-size: 1.8rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+/* Labels */
+.modal-content label {
+  font-weight: 500;
+}
+
+/* Select y input */
+.modal-content select,
+.modal-content input[type="number"] {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--secondary);
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  font-size: 1rem;
+}
+
+/* Contenedor de botones */
+.modal-content .button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Botones */
+.modal-content button {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+#btn-cancelar {
+  background-color: gray;
+  color: white;
+}
+
+#btn-cancelar:hover {
+  background-color: #555;
+}
+
+#btn-guardar {
+  background-color: var(--primary);
+  color: var(--bg-dark);
+}
+
+#btn-guardar:hover {
+  filter: brightness(1.1);
+}
+
+.tabla-anotaciones {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.tabla-anotaciones th, .tabla-anotaciones td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.tabla-anotaciones th {
+  background-color: #f5e26f;
+  color: #333;
+}
+
+.tabla-anotaciones td button {
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.tabla-anotaciones td button.editar {
+  background-color: #f0ad4e;
+  color: #fff;
+  margin-right: 0.3rem;
+}
+
+.tabla-anotaciones td button.eliminar {
+  background-color: #d9534f;
+  color: #fff;
+}
+
+.modal.show {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 10;
+}
+
+.modal-content {
+  background-color: #222;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content h2 {
+  margin-bottom: 1rem;
+}
+
+.modal-content label, .modal-content input, .modal-content select {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.modal-content button {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-content button#btn-cancelar {
+  background-color: gray;
+  color: #fff;
+  margin-right: 0.5rem;
+}
+
+.modal-content button#btn-guardar {
+  background-color: #f0ad4e;
+  color: #222;
+}
+
+.modal-content select option{
+    color: var(--bg-dark);
+}
