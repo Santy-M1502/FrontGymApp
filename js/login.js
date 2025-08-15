@@ -57,7 +57,6 @@ const loguear = () =>{
                 }
                 const data = await response.json();
                 localStorage.setItem('token', data.token);
-                alert('Bienvenido')
                 rol === 'admin' 
                 ? window.location.href = '/html/adminHome.html' 
                 : window.location.href = '/html/home.html';

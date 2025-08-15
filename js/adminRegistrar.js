@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>Rol: ${user.rol}</p>
                 </div>
                 <div>
-                    <button class="btn small edit-btn" data-index="${index}">Editar</button>
-                    <button class="btn small delete" data-id="${user.id}">Eliminar</button>
+                    <button class="btn small edit-btn" data-index="${index}">✏️</button>
+                    <button class="btn small delete" data-id="${user.id}">🗑️</button>
                 </div>
             `;
             listaUsuarios.appendChild(div);

@@ -1,3 +1,5 @@
+import { PAGO_ROUTE } from "./constantes.js";
+
 const parametro = new URLSearchParams(window.location.search)
 const tipoPlan = parametro.get('tipoPlan')
 
@@ -84,6 +86,26 @@ document.querySelectorAll('.plan').forEach(e => {
             main.style.backgroundImage = "url('/assets/low-contrast-linen.png')";
         }
     })
+});
+
+document.querySelector('.boton button').addEventListener('click', async () => {
+  const parametro = new URLSearchParams(window.location.search)
+  const tipoPlan = parametro.get('tipoPlan')
+
+  try {
+    const res = await fetch(`${PAGO_ROUTE}/crear-preferencia`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tipoPlan })
+    });
+
+    const data = await res.json();
+
+    window.location.href = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${data.id}`;
+  } catch (error) {
+    console.error(error);
+    alert('Error al iniciar el pago');
+  }
 });
 
 mostrarPlan(tipoPlan)

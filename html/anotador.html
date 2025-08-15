@@ -45,6 +45,24 @@
             
             </tbody>
         </table>
+        <div id="modal-agregar" class="modal">
+          <div class="modal-content" style="background-color: var(--bg-dark); color: var(--text-light); padding: 1.5rem; border-radius: 8px; width: 300px; margin: auto;">
+            <h2>Agregar Anotación</h2>
+            <label for="select-ejercicio">Ejercicio:</label>
+            <select id="select-ejercicio" style="width: 100%; margin-bottom: 1rem;">
+              <option value="">Selecciona un ejercicio</option>
+              <option value="1">Bicep mancuerna x6 (Brazos)</option>
+              <option value="2">Tricep Polea x6 (Brazos)</option>
+              <option value="3">Press Banca x6 (Pecho)</option>
+            </select>
+            <label for="input-notas">Notas:</label>
+            <textarea id="input-notas" rows="3" style="width: 100%; margin-bottom: 1rem;"></textarea>
+            <div style="text-align: right;">
+              <button id="btn-cancelar" style="margin-right: 0.5rem; background-color: gray; border: none; padding: 0.4rem 0.8rem; border-radius: 5px; cursor: pointer;">Cancelar</button>
+              <button id="btn-guardar" style="background-color: var(--primary); color: var(--bg-dark); border: none; padding: 0.4rem 0.8rem; border-radius: 5px; cursor: pointer;">Guardar</button>
+            </div>
+          </div>
+        </div>
     </main>
 
 

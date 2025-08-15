@@ -1,5 +1,10 @@
 const tabla = document.getElementById('tabla-anotaciones');
 const btnAgregar = document.querySelector('.agregar-btn');
+const modalAgregar = document.getElementById('modal-agregar');
+const btnCancelar = document.getElementById('btn-cancelar');
+const btnGuardar = document.getElementById('btn-guardar');
+const selectEjercicio = document.getElementById('select-ejercicio');
+const inputNotas = document.getElementById('input-notas')
 import { HISTORY_ROUTE } from './constantes.js';
 
 const token = localStorage.getItem('token');
@@ -30,7 +35,7 @@ async function cargarAnotaciones() {
         ${item.notes || ''}
         </td>
         <td style="padding: 0.75rem;">
-        ${item.Exercise ? item.Exercise.nombre : item.exerciseId}
+        ${item.Cantidad ? item.Exercise.cantidad : item.exerciseId}
         </td>
         <td style="padding: 0.75rem;">
         ${item.date ? item.date : null}
@@ -44,50 +49,49 @@ async function cargarAnotaciones() {
     });
 }
 
-btnAgregar.addEventListener('click', async () => {
-  const userId = prompt('ID Usuario:');
-  const exerciseId = prompt('ID Ejercicio:');
-  const notes = prompt('Notas:');
+btnAgregar.addEventListener('click', () => {
+  selectEjercicio.value = '';
+  inputNotas.value = '';
+  modalAgregar.style.display = 'block';
+});
 
-  if (!userId || !exerciseId) return alert('Datos incompletos');
+btnCancelar.addEventListener('click', () => {
+  modalAgregar.style.display = 'none';
+});
+
+btnGuardar.addEventListener('click', async () => {
+  const exerciseId = selectEjercicio.value;
+  const notes = inputNotas.value;
+
+  if (!exerciseId) {
+    alert('Por favor selecciona un ejercicio.');
+    return;
+  }
+
+  const userId = localStorage.getItem('userId') || prompt('ID Usuario:'); 
+
+  if (!userId) {
+    alert('ID Usuario requerido');
+    return;
+  }
 
   await fetch(HISTORY_ROUTE, {
     method: 'POST',
     headers: { 
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-     },
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
     credentials: 'include',
     body: JSON.stringify({ userId, exerciseId, notes })
   });
 
+  modalAgregar.style.display = 'none';
   cargarAnotaciones();
 });
 
-tabla.addEventListener('click', async (e) => {
-  if (e.target.classList.contains('eliminar')) {
-    const id = e.target.dataset.id;
-    await fetch(`/api/history/${id}`, {
-      method: 'DELETE',
-      credentials: 'include'
-    });
-    cargarAnotaciones();
-  }
-
-  if (e.target.classList.contains('editar')) {
-    const id = e.target.dataset.id;
-    const notes = prompt('Nueva nota:');
-    if (notes !== null) {
-      await fetch(`${HISTORY_ROUTE}/${id}`, {
-        method: 'PUT',
-        headers: { 
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}` },
-        credentials: 'include',
-        body: JSON.stringify({ notes })
-      });
-      cargarAnotaciones();
-    }
+window.addEventListener('click', (e) => {
+  if (e.target === modalAgregar) {
+    modalAgregar.style.display = 'none';
   }
 });
 

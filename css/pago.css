@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+  background: white;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  max-width: 400px;
+}
+
+.icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-size: 1rem;
+  color: #555;
+}
+
+body.success .icon { color: #2ecc71; }
+body.success h1 { color: #27ae60; }
+
+body.failure .icon { color: #e74c3c; }
+body.failure h1 { color: #c0392b; }
+
+body.pending .icon { color: #f1c40f; }
+body.pending h1 { color: #d4ac0d; }
