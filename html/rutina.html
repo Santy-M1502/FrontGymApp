@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FuerzaMax</title>
+  <link rel="stylesheet" href="/css/anotador.css">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="/css/general.css">
+</head>
+<body>
+
+  <header>
+    <a href="/html/home.html"><img src="/assets/logo.png" alt="logoPagina" class="logo"></a>
+    <nav>
+      <a href="/html/home.html">Inicio</a>
+      <a href="/html/plan.html">Planes</a>
+      <a href="/html/anotador.html">Anotador</a>
+      <a href="/html/rutina.html">Rutina</a>
+      <a href="/html/index.html">LogOut</a>
+    </nav>
+  </header>
+
+  <main style="background-color: var(--bg-dark); color: var(--text-light); min-height: 100vh; padding: 2rem;">
+    <h1 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">Rutina</h1>
+
+    <table class="tabla-anotaciones">
+      <thead>
+        <tr>
+          <th>Ejercicio</th>
+          <th>Series</th>
+          <th>Músculo</th>
+          <th>Dia</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-rutina">
+        <!-- dinámico -->
+      </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div id="modal-agregar" class="modal">
+      <div class="modal-content">
+        <h2 id="modal-title">Agregar Ejercicio</h2>
+
+        <label for="input-ejercicio">Ejercicio:</label>
+        <input id="input-ejercicio" type="text" placeholder="Ej: Press banca" />
+
+        <label for="input-series">Series:</label>
+        <input id="input-series" type="text" placeholder="Ej: 4 x 12" />
+
+        <label for="select-musculo">Músculo:</label>
+        <select id="select-musculo">
+          <option value="">Selecciona un músculo</option>
+          <option value="Pectoral">Pectoral</option>
+          <option value="Espalda">Espalda</option>
+          <option value="Piernas">Piernas</option>
+          <option value="Bíceps">Bíceps</option>
+          <option value="Tríceps">Tríceps</option>
+          <option value="Hombros">Hombros</option>
+          <option value="Abdominales">Abdominales</option>
+        </select>
+
+        <div class="button-group">
+          <button id="btn-cancelar">Cancelar</button>
+          <button id="btn-guardar">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 FuerzaMax. Todos los derechos reservados.
+  </footer>
+
+  <script type="module" src="/js/rutina.js"></script>
+  <script src="/js/navbarScroll.js"></script>
+</body>
+</html>
