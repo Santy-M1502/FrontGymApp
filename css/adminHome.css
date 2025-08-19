@@ -1,12 +1,13 @@
 main {
-  padding: 2rem;
+  padding: 4rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 3rem;
+  justify-content: space-around;
 }
 
 .dashboard-section {
-  background-color: var(--text-light);
+  background-color: #282828;
   padding: 1.5rem;
   border-radius: 16px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
@@ -15,7 +16,13 @@ main {
 .dashboard-section h2 {
   margin-bottom: 1rem;
   font-size: 1.8rem;
-  color: var(--bg-dark);
+  color: var(--text-light);
+}
+
+.card-buttons{
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
 }
 
 .user-card,
@@ -23,7 +30,7 @@ main {
 .plan-card {
   background-color: var(--text-light);
   border: 1px solid var(--text-light);
-  padding: 1rem;
+  padding: 1.7rem;
   border-radius: 12px;
   margin-bottom: 1rem;
   display: flex;
@@ -32,16 +39,25 @@ main {
   flex-wrap: wrap;
 }
 
+.user-card{
+  display: flex;
+  flex-direction: column;
+}
+
+.card-buttons{
+  display: flex;
+  flex-direction: row;
+}
+
+.ejercicio-card{
+  display: flex;
+  flex-direction: column;
+}
+
 .user-card p,
 .ejercicio-card p,
 .plan-card p {
-  margin: 0.5rem 0;
   color: var(--bg-dark);
-}
-
-button.btn.small {
-  padding: 6px 12px;
-  font-size: 0.85rem;
 }
 
 .modal {
@@ -98,7 +114,8 @@ button.btn.small {
   transition: background 0.3s;
 }
 
-.btn:hover {
+.btn:hover, .btn.secondary:hover {
+  color: var(--bg-dark);
   background-color: var(--secondary);
 }
 
@@ -107,6 +124,8 @@ button.btn.small {
   color: var(--text-light);
 }
 
-.btn.secondary:hover {
-  background-color: var(--text-light);
+button.btn.small {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  margin-left: 1em;
 }

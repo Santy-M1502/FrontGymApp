@@ -18,7 +18,9 @@ function renderUsuarios() {
     div.classList.add('user-card');
     div.innerHTML = `
       <div>
-        <p><strong>${user.nombre} ${user.apellido}</strong></p>
+        <p><strong>${user.email}</strong></p>
+      </div>
+      <div>
         <p>Rol: ${user.rol}</p>
       </div>
       <div class="card-buttons">
@@ -82,10 +84,12 @@ function renderEjercicios() {
     div.innerHTML = `
       <div>
         <p><strong>${ej.nombre}</strong></p>
+      </div>
+      <div>
         <p>Músculo: ${ej.musculo}</p>
       </div>
       <div class="card-buttons">
-        <a href="/html/adminEditar.html?ejercicioId=${ej.id}" class="btn small">Editar</a>
+        <button href="/html/adminEditar.html?ejercicioId=${ej.id}" class="btn small edit-ejercicio">Editar</button>
         <button class="btn small delete-ejercicio" data-id="${ej.id}">Eliminar</button>
       </div>
     `;
