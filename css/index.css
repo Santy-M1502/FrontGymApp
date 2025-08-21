@@ -249,27 +249,6 @@ section img:hover{
     transition: filter .3s ease-in;
 }
 
-@keyframes animationLogo {
-    0%{
-        transform: rotate(0deg)
-    }
-    20%{
-        transform: rotate(140deg)
-    }
-    40%{
-        transform: rotate(120deg)
-    }
-    60%{
-        transform: rotate(300deg)
-    }
-    80%{
-        transform: rotate(270deg)
-    }
-    100%{
-        transform: rotate(360deg)
-    }
-}
-
 @keyframes borderColor {
     0% {
     background-position: 0% 50%;

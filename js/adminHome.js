@@ -9,11 +9,16 @@ let mostrarEjercicios = 5;
 
 // ==================== USUARIOS ====================
 
-function renderUsuarios() {
+function renderUsuarios(filtrado = todosLosUsuarios) {
   const container = document.getElementById('lista-usuarios');
   container.innerHTML = '';
 
-  todosLosUsuarios.slice(0, mostrarUsuarios).forEach(user => {
+  if (!filtrado || filtrado.length === 0) {
+    container.innerHTML = `<p>No hay usuarios que coincidan.</p>`;
+    return;
+  }
+
+  filtrado.slice(0, mostrarUsuarios).forEach(user => {
     const div = document.createElement('div');
     div.classList.add('user-card');
     div.innerHTML = `
@@ -31,7 +36,8 @@ function renderUsuarios() {
     container.appendChild(div);
   });
 
-  document.querySelectorAll('.delete-user').forEach(btn => {
+  // botones eliminar/editar
+  container.querySelectorAll('.delete-user').forEach(btn => {
     btn.onclick = async () => {
       const id = btn.dataset.id;
       const res = await fetch(`${USER_ROUTE}/${id}`, {
@@ -45,7 +51,7 @@ function renderUsuarios() {
     };
   });
 
-  document.querySelectorAll('.edit-user').forEach(btn => {
+  container.querySelectorAll('.edit-user').forEach(btn => {
     btn.onclick = () => {
       const id = btn.dataset.id;
       window.location.href = `/html/adminRegistrar.html?userId=${id}`;
@@ -74,11 +80,16 @@ fetch(USER_ROUTE, {
 
 // ==================== EJERCICIOS ====================
 
-function renderEjercicios() {
+function renderEjercicios(filtrado = todosLosEjercicios) {
   const container = document.getElementById('lista-ejercicios');
   container.innerHTML = '';
 
-  todosLosEjercicios.slice(0, mostrarEjercicios).forEach(ej => {
+  if (!filtrado || filtrado.length === 0) {
+    container.innerHTML = `<p>No hay ejercicios que coincidan.</p>`;
+    return;
+  }
+
+  filtrado.slice(0, mostrarEjercicios).forEach(ej => {
     const div = document.createElement('div');
     div.classList.add('ejercicio-card');
     div.innerHTML = `
@@ -96,7 +107,7 @@ function renderEjercicios() {
     container.appendChild(div);
   });
 
-  document.querySelectorAll('.delete-ejercicio').forEach(btn => {
+  container.querySelectorAll('.delete-ejercicio').forEach(btn => {
     btn.onclick = async () => {
       const id = btn.dataset.id;
       const res = await fetch(`${EXERCISE_ROUTE}/${id}`, {
@@ -129,3 +140,42 @@ fetch(EXERCISE_ROUTE, {
     todosLosEjercicios = data;
     renderEjercicios();
   });
+
+const searchUsers = document.querySelector(".searchUsers")
+const searchExercices = document.querySelector(".searchExercices")
+
+searchUsers.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const valor = e.target[0].value.trim();
+  if (!valor) return renderUsuarios(todosLosUsuarios);
+
+  const filtrado = await searchByEmail(valor, USER_ROUTE);
+  renderUsuarios(filtrado);
+});
+
+searchExercices.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const valor = e.target[0].value.trim();
+  if (!valor) return renderEjercicios(todosLosEjercicios);
+
+  const filtrado = await searchByEmail(valor, EXERCISE_ROUTE);
+  renderEjercicios(filtrado);
+});
+
+async function searchByEmail(valor, route) {
+  try {
+    const res = await fetch(`${route}/search`, {
+      method: "POST",
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` 
+      },
+      body: JSON.stringify({ valor })
+    });
+    const data = await res.json();
+    return data; 
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+}

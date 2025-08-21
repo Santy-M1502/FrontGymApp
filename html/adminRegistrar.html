@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/css/admin.css">
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="/css/logo.css">
 </head>
 <body>
 
@@ -24,19 +25,19 @@
   <main>
     <form class="formBox">
       <label for="nombre">Nombre</label>
-      <input type="text" id="nombre" minlength="3" required>
+      <input type="text" id="nombre" minlength="3" required placeholder="ej: Juan">
       <label for="apellido">Apellido</label>
-      <input type="text" id="apellido" minlength="3" required>
+      <input type="text" id="apellido" minlength="3" required placeholder="ej: Guiterrez">
       <label for="dni">DNI</label>
-      <input type="number" id="dni" min="10000000" max="100000000" required>
+      <input type="number" id="dni" min="10000000" max="100000000" required placeholder="ej: 12345678">
       <label for="telefono">Teléfono</label>
-      <input type="tel" id="telefono" required>
+      <input type="tel" id="telefono" required placeholder="ej: 11 12345678">
       <label for="email">Email</label>
-      <input type="email" id="email" required> 
+      <input type="email" id="email" required placeholder="ej: juan@mail.com"> 
       <label for="contrasena">Contraseña</label>
-      <input type="password" id="contrasena" required> 
+      <input type="password" id="contrasena" required placeholder="ej: "> 
       <label for="plan">IdPlan</label>
-      <input type="number" id="plan" min="1" max="3">
+      <input type="number" id="plan" min="1" max="3" placeholder="1 / 2 / 3">
       <label for="rol">Rol</label>
       <select name="rol" id="rol">
         <option value="user">Usuario</option>

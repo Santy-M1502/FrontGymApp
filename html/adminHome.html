@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/footer.css">
   <link rel="stylesheet" href="/css/bienvenida.css">
+  <link rel="stylesheet" href="/css/logo.css">
 </head>
 <body>
   <div id="modalBienvenida">
@@ -28,7 +29,10 @@
 
   <main>
     <section class="dashboard-section" id="usuarios">
-      <h2>Usuarios</h2>
+      <form class="title searchUsers">
+        <h2>Usuarios</h2>
+        <input type="search" id="searchUsers" placeholder="buscar usuario...">
+      </form>
       <div id="lista-usuarios"></div>
       <div class="buttons-row">
         <button class="btn secondary" id="btn-usuarios-mas">Mostrar más</button>
@@ -37,7 +41,10 @@
     </section>
 
     <section class="dashboard-section" id="ejercicios">
-      <h2>Ejercicios</h2>
+      <form class="title searchExercices">
+        <h2>Ejercicios</h2>
+        <input type="search" id="searchExercices" placeholder="buscar ejercicio...">
+      </form>
       <div id="lista-ejercicios"></div>
       <div class="buttons-row">
         <button class="btn secondary" id="btn-ejercicios-mas">Mostrar más</button>
