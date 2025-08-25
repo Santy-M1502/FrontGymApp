@@ -1,72 +1,60 @@
 import { URL_BASE } from "./constantes.js";
 
-const userButton = document.querySelector('.user');
-const userAdmin = document.querySelector('.admin');
-const formulario = document.querySelector('.formulario');
+const formulario = document.querySelector(".formulario");
 
-const cambiarClases = (e) =>{
-    if (e) {
-        e.preventDefault();
+formulario.innerHTML = `
+<div class="inputs-box">
+    <div class="inputs-inputs">
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+        <label for="contrasena">Contraseña</label>
+        <input type="password" id="contrasena" required>
+    </div>
+    <div class="button-box">
+        <button class="button-login">Log In</button>
+    </div>
+</div>
+`;
+
+const loguear = () => {
+  const buttonLogin = document.querySelector(".button-login");
+  buttonLogin.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const email = document.querySelector("#email").value;
+    const contrasena = document.querySelector("#contrasena").value;
+
+    if (!email || !contrasena) return alert("Complete todos los campos");
+
+    try {
+      const res = await fetch(`${URL_BASE}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, contrasena }),
+        credentials: "include"
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        return alert(err.msg || "Error de login");
+      }
+
+      const data = await res.json();
+
+      // Guardamos solo info de usuario para UI/redirección
+      localStorage.setItem("userRol", data.user.rol);
+      localStorage.setItem("userName", data.user.nombre);
+
+      window.location.href =
+        data.user.rol === "admin"
+          ? "/html/adminHome.html"
+          : "/html/home.html";
+
+    } catch (error) {
+      console.error("Error login", error);
+      alert("Error al iniciar sesión");
     }
-    let who = '';
-    if(userButton.classList.contains('select')) {
-        userAdmin.classList.add('select');
-        userButton.classList.remove('select');
-        who = 'Email de Administrador';
-    }else if(userAdmin.classList.contains('select')) {
-        userButton.classList.add('select');
-        userAdmin.classList.remove('select');
-        who = 'Email de Usuario';
-    }
-    formulario.innerHTML = `
-    <div class="inputs-box">
-        <div class="inputs-inputs">
-            <label for="email">${who}</label>
-            <input type="text" id="email">
-            <label for="contrasena">Contrasena</label>
-            <input type="password" id="contrasena">
-        </div>
-        <div class="button-box">
-            <button class="button-login">Log In</button>
-        </div>
-    </div>`;
-    loguear();
-}
+  });
+};
 
-const loguear = () =>{
-    const buttonLogin = document.querySelector('.button-login');
-    buttonLogin.addEventListener('click', async (e) => {
-        e.preventDefault();
-        const email = document.querySelector('#email').value;
-        const contrasena = document.querySelector('#contrasena').value;
-        const rol = userButton.classList.contains('select')? 'user' : 'admin'
-        if(!email || !contrasena){
-            alert("Por favor, complete todos los campos")
-        }else{
-            try {
-                const response = await fetch(`${URL_BASE}/login`,{
-                    method: 'POST',
-                    headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body: JSON.stringify({email, contrasena, rol})
-                })
-                if (!response.ok){
-                    alert("Email o Contrasena incorrecta")
-                    throw new Error("Error en el inicio de sesion");
-                }
-                const data = await response.json();
-                localStorage.setItem('token', data.token);
-                rol === 'admin' 
-                ? window.location.href = '/html/adminHome.html' 
-                : window.location.href = '/html/home.html';
-            } catch (error) {
-                console.error('Credenciales incorrectas', error)
-            }}
-    });
-}
-
-
-cambiarClases();
-userButton.addEventListener('click', cambiarClases);
-userAdmin.addEventListener('click', cambiarClases);
+loguear();

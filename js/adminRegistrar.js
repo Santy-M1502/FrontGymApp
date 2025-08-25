@@ -1,4 +1,5 @@
-import { USER_ROUTE } from "./constantes.js";
+import { URL_BASE, USER_ROUTE } from "./constantes.js";
+import { fetchWithAuth } from "./fetchWithAuth.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
@@ -24,12 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const idPlan = e.target[6].value;
             const rol = e.target[7].value;
 
-            const response = await fetch(`${USER_ROUTE}/`, {
+            const response = await fetchWithAuth(`${USER_ROUTE}/`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
                 body: JSON.stringify({ contrasena, nombre, apellido, dni, telefono, email, idPlan, rol })
             });
 
@@ -49,13 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===================== CARGAR Y MOSTRAR USUARIOS =====================
     async function cargarUsuarios() {
-        const res = await fetch(USER_ROUTE, {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
-        const usuarios = await res.json();
+        const usuarios = await fetchWithAuth(`${USER_ROUTE}`);
         usuariosGlobal = usuarios;
         listaUsuarios.innerHTML = '';
-
         usuarios.forEach((user, index) => {
             const div = document.createElement('div');
             div.classList.add('user-card');
@@ -75,9 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.delete').forEach(btn => {
             btn.onclick = async () => {
                 const id = btn.dataset.id;
-                await fetch(`${USER_ROUTE}/${id}`, {
-                    method: 'DELETE',
-                    headers: { 'Authorization': `Bearer ${token}` }
+                await fetchWithAuth(`${USER_ROUTE}/${id}`, {
+                    method: 'DELETE'
                 });
                 cargarUsuarios();
             };
@@ -117,18 +109,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 idPlan: formEditar['edit-plan'].value,
                 rol: formEditar['edit-rol'].value
             };
-
-            const res = await fetch(`${USER_ROUTE}/${usuarioEditandoId}`, {
+            const res = await fetchWithAuth(`${USER_ROUTE}/${usuarioEditandoId}`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
                 body: JSON.stringify(updatedUser)
             });
-
-            if (!res.ok) throw new Error('Error al actualizar');
-
+            
             alert('Usuario actualizado correctamente');
             modal.classList.add('hidden');
             cargarUsuarios();

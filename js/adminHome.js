@@ -1,6 +1,5 @@
 import { USER_ROUTE, EXERCISE_ROUTE } from './constantes.js';
-
-const token = localStorage.getItem('token');
+import { fetchWithAuth } from './fetchWithAuth.js';
 
 let todosLosUsuarios = [];
 let todosLosEjercicios = [];
@@ -8,6 +7,15 @@ let mostrarUsuarios = 5;
 let mostrarEjercicios = 5;
 
 // ==================== USUARIOS ====================
+
+async function loadUsuarios() {
+  try {
+    todosLosUsuarios = await fetchWithAuth(USER_ROUTE);
+    renderUsuarios();
+  } catch (err) {
+    console.error("Error cargando usuarios:", err);
+  }
+}
 
 function renderUsuarios(filtrado = todosLosUsuarios) {
   const container = document.getElementById('lista-usuarios');
@@ -22,12 +30,8 @@ function renderUsuarios(filtrado = todosLosUsuarios) {
     const div = document.createElement('div');
     div.classList.add('user-card');
     div.innerHTML = `
-      <div>
-        <p><strong>${user.email}</strong></p>
-      </div>
-      <div>
-        <p>Rol: ${user.rol}</p>
-      </div>
+      <div><p><strong>${user.email}</strong></p></div>
+      <div><p>Rol: ${user.rol}</p></div>
       <div class="card-buttons">
         <button class="btn small edit-user" data-id="${user.id}">Editar</button>
         <button class="btn small delete-user" data-id="${user.id}">Eliminar</button>
@@ -36,17 +40,15 @@ function renderUsuarios(filtrado = todosLosUsuarios) {
     container.appendChild(div);
   });
 
-  // botones eliminar/editar
   container.querySelectorAll('.delete-user').forEach(btn => {
     btn.onclick = async () => {
       const id = btn.dataset.id;
-      const res = await fetch(`${USER_ROUTE}/${id}`, {
-        method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (res.ok) {
+      try {
+        await fetchWithAuth(`${USER_ROUTE}/${id}`, { method: 'DELETE' });
         todosLosUsuarios = todosLosUsuarios.filter(u => u.id !== Number(id));
         renderUsuarios();
+      } catch (err) {
+        console.error("Error eliminando usuario:", err);
       }
     };
   });
@@ -69,16 +71,16 @@ document.getElementById('btn-usuarios-todos').onclick = () => {
   renderUsuarios();
 };
 
-fetch(USER_ROUTE, {
-  headers: { 'Authorization': `Bearer ${token}` }
-})
-  .then(res => res.json())
-  .then(data => {
-    todosLosUsuarios = data;
-    renderUsuarios();
-  });
-
 // ==================== EJERCICIOS ====================
+
+async function loadEjercicios() {
+  try {
+    todosLosEjercicios = await fetchWithAuth(EXERCISE_ROUTE);
+    renderEjercicios();
+  } catch (err) {
+    console.error("Error cargando ejercicios:", err);
+  }
+}
 
 function renderEjercicios(filtrado = todosLosEjercicios) {
   const container = document.getElementById('lista-ejercicios');
@@ -93,14 +95,10 @@ function renderEjercicios(filtrado = todosLosEjercicios) {
     const div = document.createElement('div');
     div.classList.add('ejercicio-card');
     div.innerHTML = `
-      <div>
-        <p><strong>${ej.nombre}</strong></p>
-      </div>
-      <div>
-        <p>Músculo: ${ej.musculo}</p>
-      </div>
+      <div><p><strong>${ej.nombre}</strong></p></div>
+      <div><p>Músculo: ${ej.musculo}</p></div>
       <div class="card-buttons">
-        <button href="/html/adminEditar.html?ejercicioId=${ej.id}" class="btn small edit-ejercicio">Editar</button>
+        <button class="btn small edit-ejercicio" onclick="window.location.href='/html/adminEditar.html?ejercicioId=${ej.id}'">Editar</button>
         <button class="btn small delete-ejercicio" data-id="${ej.id}">Eliminar</button>
       </div>
     `;
@@ -110,13 +108,12 @@ function renderEjercicios(filtrado = todosLosEjercicios) {
   container.querySelectorAll('.delete-ejercicio').forEach(btn => {
     btn.onclick = async () => {
       const id = btn.dataset.id;
-      const res = await fetch(`${EXERCISE_ROUTE}/${id}`, {
-        method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (res.ok) {
+      try {
+        await fetchWithAuth(`${EXERCISE_ROUTE}/${id}`, { method: 'DELETE' });
         todosLosEjercicios = todosLosEjercicios.filter(e => e.id !== Number(id));
         renderEjercicios();
+      } catch (err) {
+        console.error("Error eliminando ejercicio:", err);
       }
     };
   });
@@ -132,50 +129,46 @@ document.getElementById('btn-ejercicios-todos').onclick = () => {
   renderEjercicios();
 };
 
-fetch(EXERCISE_ROUTE, {
-  headers: { 'Authorization': `Bearer ${token}` }
-})
-  .then(res => res.json())
-  .then(data => {
-    todosLosEjercicios = data;
-    renderEjercicios();
-  });
+// ==================== BUSQUEDAS ====================
 
-const searchUsers = document.querySelector(".searchUsers")
-const searchExercices = document.querySelector(".searchExercices")
+const searchUsers = document.querySelector(".searchUsers");
+const searchExercices = document.querySelector(".searchExercices");
 
 searchUsers.addEventListener('submit', async (e) => {
   e.preventDefault();
   const valor = e.target[0].value.trim();
-  if (!valor) return renderUsuarios(todosLosUsuarios);
+  if (!valor) return renderUsuarios();
 
-  const filtrado = await searchByEmail(valor, USER_ROUTE);
-  renderUsuarios(filtrado);
+  try {
+    const filtrado = await fetchWithAuth(`${USER_ROUTE}/search`, {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ valor })
+    });
+    renderUsuarios(filtrado);
+  } catch (err) {
+    console.error("Error buscando usuarios:", err);
+  }
 });
 
 searchExercices.addEventListener('submit', async (e) => {
   e.preventDefault();
   const valor = e.target[0].value.trim();
-  if (!valor) return renderEjercicios(todosLosEjercicios);
+  if (!valor) return renderEjercicios();
 
-  const filtrado = await searchByEmail(valor, EXERCISE_ROUTE);
-  renderEjercicios(filtrado);
-});
-
-async function searchByEmail(valor, route) {
   try {
-    const res = await fetch(`${route}/search`, {
+    const filtrado = await fetchWithAuth(`${EXERCISE_ROUTE}/search`, {
       method: "POST",
-      headers: { 
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}` 
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ valor })
     });
-    const data = await res.json();
-    return data; 
+    renderEjercicios(filtrado);
   } catch (err) {
-    console.error(err);
-    return [];
+    console.error("Error buscando ejercicios:", err);
   }
-}
+});
+
+// ==================== INICIO ====================
+
+loadUsuarios();
+loadEjercicios();

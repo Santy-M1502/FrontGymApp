@@ -1,4 +1,5 @@
-import { URL_BASE } from "./constantes.js";
+import { EXERCISE_ROUTE } from "./constantes.js";
+import { fetchWithAuth } from "./fetchWithAuth.js";
 const token = localStorage.getItem('token');
 
 document.querySelector('.btn.secondary').addEventListener('click', filtrar);
@@ -18,15 +19,10 @@ document.getElementById('confirmarAgregar').addEventListener('click', () => {
   const musculo = document.getElementById('nuevoMusculo').value;
   const cantidad = document.getElementById('nuevaCantidad').value;
 
-  fetch(`${URL_BASE}/api/exercise`, {
+  fetchWithAuth(`/${EXERCISE_ROUTE}`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    },
     body: JSON.stringify({ nombre, musculo, cantidad: parseInt(cantidad) })
   })
-    .then(res => res.json())
     .then(() => {
       filtrar();
       document.getElementById('modalAgregar').classList.add('hidden');
@@ -62,11 +58,8 @@ function actualizarTabla(data) {
     // Botón eliminar
     fila.querySelector('.delete').addEventListener('click', () => {
       if (confirm("¿Estás seguro que querés eliminar este ejercicio?")) {
-        fetch(`${URL_BASE}/api/exercise/${item.id}`, {
-          method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
+        fetchWithAuth(`${EXERCISE_ROUTE}/${item.id}`, {
+          method: 'DELETE'
         }).then(() => filtrar());
       }
     });
@@ -80,15 +73,10 @@ document.getElementById('confirmarEditar').addEventListener('click', () => {
   const musculo = document.getElementById('editarMusculo').value;
   const cantidad = parseInt(document.getElementById('editarCantidad').value);
 
-  fetch(`${URL_BASE}/api/exercise/${idEditando}`, {
+  fetchWithAuth(`${EXERCISE_ROUTE}/${idEditando}`, {
     method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    },
     body: JSON.stringify({ nombre, musculo, cantidad })
   })
-    .then(res => res.json())
     .then(() => {
       filtrar();
       document.getElementById('modalEditar').classList.add('hidden');
@@ -100,14 +88,7 @@ function filtrar() {
   const musculo = document.querySelectorAll('.input')[1].value;
   const musculoCapitalizado = musculo.charAt(0).toUpperCase() + musculo.slice(1);
 
-  fetch(`${URL_BASE}/api/exercise?buscar=${encodeURIComponent(texto)}&musculo=${musculoCapitalizado}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    }
-  })
-    .then(res => res.json())
+  fetchWithAuth(`${EXERCISE_ROUTE}?buscar=${encodeURIComponent(texto)}&musculo=${musculoCapitalizado}`,)
     .then(data => {
       actualizarTabla(data);
     });
