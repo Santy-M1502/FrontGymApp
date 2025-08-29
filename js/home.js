@@ -79,13 +79,13 @@ async function verificarDias() {
 
 document.addEventListener('click', (event) => {
   if (event.target.classList.contains('button-week')) {
-    window.location.href = 'http://localhost:5501/html/plan.html?plan=week';
+    window.location.href = '/html/plan.html?plan=week';
   }
   else if (event.target.classList.contains('button-month')) {
-    window.location.href = 'http://localhost:5501/html/plan.html?plan=month';
+    window.location.href = '/html/plan.html?plan=month';
   }
   else if (event.target.classList.contains('button-year')) {
-    window.location.href = 'http://localhost:5501/html/plan.html?plan=year';
+    window.location.href = '/html/plan.html?plan=year';
   }
 });
 
