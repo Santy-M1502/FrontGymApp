@@ -1,4 +1,4 @@
-import { PAGO_ROUTE } from "./constantes.js";
+import { PAGO_ROUTE, URL_BASE } from "./constantes.js";
 
 const parametro = new URLSearchParams(window.location.search)
 const tipoPlan = parametro.get('tipoPlan')
@@ -67,41 +67,41 @@ const mostrarPlan = (tipo) => {
   planInfo.appendChild(listaBeneficios);
 };
 
-
+var mes = tipoPlan
 document.querySelectorAll('.plan').forEach(e => {
     e.addEventListener('input', () =>{
         if(e.classList.contains('semanal')){
             mostrarPlan('semanal')
             main.style.backgroundColor = 'var(--bg-dark)'
             main.style.backgroundImage = "url('/assets/low-contrast-linen.png')";
+            mes = 'semanal'
         }
         else if(e.classList.contains('mensual')){
             mostrarPlan('mensual')
             main.style.backgroundColor = 'var(--secondary)'
             main.style.backgroundImage = "url('/assets/low-contrast-linen.png')";
+            mes = 'mensual'
         }
         else if(e.classList.contains('anual')){
             mostrarPlan('anual')
             main.style.backgroundColor = 'var(--primary)'
             main.style.backgroundImage = "url('/assets/low-contrast-linen.png')";
+            mes = 'anual'
         }
     })
 });
 
 document.querySelector('.boton button').addEventListener('click', async () => {
-  const parametro = new URLSearchParams(window.location.search)
-  const tipoPlan = parametro.get('tipoPlan')
-
   try {
-    const res = await fetch(`${PAGO_ROUTE}/crear-preferencia`, {
+    const res = await fetch(`${URL_BASE}${PAGO_ROUTE}/crear-preferencia`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tipoPlan })
+      body: JSON.stringify({ tipoPlan : mes })
     });
-
+  
     const data = await res.json();
 
-    window.location.href = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${data.id}`;
+    window.location.href = data.init_point;
   } catch (error) {
     console.error(error);
     alert('Error al iniciar el pago');

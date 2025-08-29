@@ -1,5 +1,6 @@
 // anotador.js
 import { HISTORY_ROUTE, EXERCISE_ROUTE } from './constantes.js';
+import { fetchWithAuth } from './fetchWithAuth.js';
 
 const tabla = document.getElementById('tabla-anotaciones');
 const btnAgregar = document.querySelector('.agregar-btn');
@@ -10,7 +11,6 @@ const selectEjercicio = document.getElementById('select-ejercicio');
 const inputSeries = document.getElementById('input-series');
 const modalTitle = document.getElementById('modal-title');
 
-const token = localStorage.getItem('token');
 let editId = null; // id de la anotación que se está editando
 
 // -----------------------------
@@ -18,16 +18,9 @@ let editId = null; // id de la anotación que se está editando
 // -----------------------------
 async function cargarAnotaciones() {
   try {
-    const res = await fetch(HISTORY_ROUTE, {
-      credentials: 'include',
-      headers: { 'Authorization': `Bearer ${token}` }
+    const data = await fetchWithAuth(`${HISTORY_ROUTE}`, {
+      credentials: 'include'
     });
-    const data = await res.json();
-
-    if (!res.ok) {
-      console.error('Error al cargar anotaciones:', data);
-      return;
-    }
 
     tabla.innerHTML = '';
     data.forEach(item => {
@@ -53,10 +46,7 @@ async function cargarAnotaciones() {
 // -----------------------------
 async function cargarEjercicios() {
   try {
-    const res = await fetch(EXERCISE_ROUTE, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
-    const ejercicios = await res.json();
+    const ejercicios = await fetchWithAuth(`${EXERCISE_ROUTE}`, {});
 
     selectEjercicio.innerHTML = '<option value="">Selecciona un ejercicio</option>';
     ejercicios.forEach(ej => {
@@ -105,23 +95,15 @@ btnGuardar.addEventListener('click', async () => {
   try {
     if (editId) {
       // EDITAR
-      await fetch(`${HISTORY_ROUTE}/${editId}`, {
+      await fetchWithAuth(`${HISTORY_ROUTE}/${editId}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
         body: JSON.stringify({ exerciseId, series })
       });
       editId = null;
     } else {
       // AGREGAR
-      await fetch(HISTORY_ROUTE, {
+      await fetchWithAuth(`${HISTORY_ROUTE}`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
         body: JSON.stringify({ exerciseId, series })
       });
     }
@@ -141,10 +123,7 @@ tabla.addEventListener('click', async (e) => {
   if (e.target.classList.contains('editar')) {
     editId = id;
     try {
-      const res = await fetch(`${HISTORY_ROUTE}/${id}`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      const item = await res.json();
+      const item = await fetchWithAuth(`${HISTORY_ROUTE}/${id}`, {});
       selectEjercicio.value = item.exerciseId;
       inputSeries.value = item.series;
       modalTitle.textContent = 'Editar Anotación';
@@ -157,10 +136,7 @@ tabla.addEventListener('click', async (e) => {
   if (e.target.classList.contains('eliminar')) {
     if (!confirm('¿Seguro querés eliminar esta anotación?')) return;
     try {
-      await fetch(`${HISTORY_ROUTE}/${id}`, {
-        method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
+      await fetchWithAuth(`${HISTORY_ROUTE}/${id}`, {});
       cargarAnotaciones();
     } catch (error) {
       console.error('Error al eliminar anotación:', error);

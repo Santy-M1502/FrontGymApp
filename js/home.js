@@ -1,4 +1,5 @@
 import { USER_ROUTE } from './constantes.js';
+import { fetchWithAuth } from './fetchWithAuth.js';
 
 function agregarLineasAnimadas(idSeccion, cantidad = 10) {
   const seccion = document.getElementById(idSeccion);
@@ -49,18 +50,9 @@ async function verificarDias() {
   const start = document.getElementById('start');
 
   try {
-    const res = await fetch(`${USER_ROUTE}/dias-restantes`, {
+    const data = await fetchWithAuth(`${USER_ROUTE}/dias-restantes`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
-
-    if (!res.ok) {
-      const text = await res.text();  // para ver qué devuelve el servidor realmente
-      console.error('Error en la respuesta:', text);
-      start.innerHTML = '<p>Error al obtener días restantes.</p>';
-      return;
-    }
-
-    const data = await res.json();
 
     if (!data.expirado) {
       start.innerHTML = `

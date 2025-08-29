@@ -41,9 +41,9 @@ const loguear = () => {
 
       const data = await res.json();
 
-      // Guardamos solo info de usuario para UI/redirección
       localStorage.setItem("userRol", data.user.rol);
       localStorage.setItem("userName", data.user.nombre);
+      localStorage.setItem("userId", data.user.id)
 
       window.location.href =
         data.user.rol === "admin"

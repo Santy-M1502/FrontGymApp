@@ -1,9 +1,10 @@
-// Slider de imágenes
-
-let indiceActual = 0;
+import { URL_BASE, PAGO_ROUTE } from './constantes.js'
+import { fetchWithAuth } from './fetchWithAuth.js';
 
 const params = new URLSearchParams(window.location.search);
 const plan = params.get('plan');
+
+let indiceActual = 0;
 
 if (plan == "week") {
   indiceActual = 0;
@@ -31,4 +32,23 @@ document.querySelector('.flecha.izquierda').addEventListener('click', () => {
 document.querySelector('.flecha.derecha').addEventListener('click', () => {
   indiceActual = (indiceActual + 1) % slides.length;
   mostrarSlide(indiceActual);
+  console.log(indiceActual)
 });
+const planes = ["semanal", "mensual", "anual"]
+
+async function cambiar() {
+  try {
+      const res = await fetchWithAuth(`${URL_BASE}${PAGO_ROUTE}/crear-preferencia`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tipoPlan : planes[indiceActual] })
+      });
+    
+      const data = await res.json();
+  
+      window.location.href = data.init_point;
+    } catch (error) {
+      console.error(error);
+      alert('Error al iniciar el pago');
+    }
+  }
