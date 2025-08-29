@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FuerzaMax</title>
+  <link rel="stylesheet" href="/css/general.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="/css/logo.css">
+</head>
+<body>
+
+    <header>
+        <a href="/html/adminHome.html"><img src="/assets/logo.png" alt="logoPagina" class="logo"></a>
+        <nav>
+        <a href="/html/adminHome.html">Inicio</a>
+        <a href="/html/adminRegistrar.html">Usuarios</a>
+        <a href="/html/adminEditar.html">Ejercicios</a>
+        <a href="/html/adminRutinas.html">Rutinas</a>
+        <a href="/html/index.html">LogOut</a>
+        </nav>
+    </header>
+
+     <main class="container">
+
+    <form class="searchUsers">
+      <input type="text" class="input" placeholder="Buscar email...">
+      <button type="submit" class="btn primary">Buscar</button>
+    </form>
+
+    <div id="lista-usuarios" class="user-list scrollable-list"></div>
+
+    <div class="filters">
+      <button id="btn-usuarios-mas" class="btn small">Mostrar más</button>
+      <button id="btn-usuarios-todos" class="btn small">Mostrar todos</button>
+    </div>
+
+    <div id="modalRutina" class="modal hidden">
+      <div class="modal-content">
+        <button id="cerrarModal">&times;</button>
+        <h2>Editar Rutina</h2>
+        <form id="formRutina">
+          <div id="camposRutina" class="formBox"></div>
+          <div class="modal-buttons">
+            <button type="submit" class="btn primary">Guardar Cambios</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="modalAgregarRutina" class="modal hidden">
+      <div class="modal-content">
+        <button id="cerrarModalAgregar">&times;</button>
+        <h2>Agregar Rutina</h2>
+        <form id="formAgregarRutina">
+          <div id="camposAgregarRutina" class="formBox">
+            <div class="formBox">
+              <label>Ejercicio:</label>
+              <select name="ejercicioId" id="selectEjercicio"></select>
+            </div>
+            <div class="formBox">
+              <label>Series:</label>
+              <input type="number" name="series" min="0" placeholder="Cantidad de series">
+            </div>
+            <div class="formBox">
+              <label>Día:</label>
+              <input type="text" name="dia" placeholder="Ej: lunes">
+            </div>
+          </div>
+          <div class="modal-buttons">
+            <button type="submit" class="btn primary">Agregar Rutina</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 FuerzaMax. Todos los derechos reservados.
+  </footer>
+
+  <script src="/js/navbarScroll.js"></script>
+  <script type="module" src="/js/validarToken.js"></script>
+  <script type="module" src="/js/adminRutinas.js"></script>
+</body>
+</html>
